@@ -1,7 +1,7 @@
 <!--
  * @Author: zhaotao
  * @Date: 2021-04-13 10:06:30
- * @LastEditTime: 2021-04-19 20:04:08
+ * @LastEditTime: 2021-04-20 18:32:17
  * @LastEditors: zhaotao
  * @Description: login page
  * @FilePath: \vue_program\vue-program\src\components\Login.vue
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -37,20 +38,24 @@ export default {
 
   },
   methods: {
+    ...mapActions(['changeLogin', 'changeUsername', 'changePassword']),
     loginHandle () { // 登录
       // 表单验证
       if (!this.username || !this.password) {
         return
       }
       // 修改isLogin状态
-      this.$store.commit('changeLogin', true)
-      this.$store.dispatch('changeLogin', true)
+      // this.$store.commit('changeLogin', true)
+      // this.$store.dispatch('changeLogin', true)
+      this.changeLogin(true)
       // 修改username状态
       // this.$store.commit('changeUsername', this.username)
-      this.$store.dispatch('changeUsername', true)
+      // this.$store.dispatch('changeUsername', this.username)
+      this.changeUsername(this.username)
       // 修改password状态
       // this.$store.commit('changePassword', this.password)
-      this.$store.dispatch('changePassword', true)
+      // this.$store.dispatch('changePassword', this.password)
+      this.changePassword(this.password)
       this.$router.push('/')
     }
   }
